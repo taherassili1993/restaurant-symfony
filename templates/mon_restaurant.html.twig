@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}{% endblock%}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock%}
+
+{% block body %}
+
+    <style>
+    #mon-restaurant
+    {
+        margin-top: 100px;
+        margin-bottom: 300px;
+    }
+
+    #mon-restaurant h1
+    {
+        font-size: 20px;
+        color: #999;
+        margin-bottom: 30px;
+    }
+
+    #mon-restaurant .form-div
+    {
+        margin-bottom: 20px;
+    }
+
+    #mon-restaurant label
+    {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    #mon-restaurant input
+    {
+        width: 400px;
+        height: 40px;
+        border: 1px solid #ccc;
+        padding-left: 10px;
+    }
+
+    #mon-restaurant input:focus
+    {
+        outline: none;
+        box-shadow: none;
+        border: 1px solid #999;
+    }
+    </style>
+
+    <section id="mon-restaurant">
+        <div class='container'>
+            <div class='row'>
+                <div class='col-md-7'>
+                    <h1>Les détails de restaurant</h1>
+                    <form method='POST' action=''>
+                        <div class='form-div'>
+                            <label>Nom de restaurant</label>
+                            <input name='nom' value='{{ restaurant.getNom() }}' required />
+                        </div>
+
+                        <div class='form-div'>
+                            <label>Téléphone</label>
+                            <input name='telephone' value='{{ restaurant.getTelephone() }}' required />
+                        </div>
+
+                        <div class='form-div'>
+                            <label>Addresse</label>
+                            <input name='addresse' value='{{ restaurant.getAddresse() }}' required />
+                        </div>
+
+                        <div class='form-div'>
+                            <button type='submit' class='btn btn-primary btn-sm'>Enregistrer</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class='col-md-5'>
+                    <h1>les repas de restaurant</h1>
+                    {% if not restaurant.getId() %}
+                    <p>Vous devez ajouter les détails de restaurants avant l'ajout des repas.</p>
+
+                    {% else %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}
