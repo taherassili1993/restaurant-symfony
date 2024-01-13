@@ -82,6 +82,60 @@
                     <p>Vous devez ajouter les détails de restaurants avant l'ajout des repas.</p>
 
                     {% else %}
+
+                    <table class='table' style='margin-bottom: 40px; border-bottom: 1px solid #ccc;'>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prix</th>
+                            <th>Action</th>
+                        </tr>
+
+                        {% for rep in repas %}
+                        <tr>
+                            <td>{{ rep.getNom() }}</td>
+                            <td>{{ rep.getPrix() }}</td>
+                            <td>
+                                <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete-{{ rep.getId() }}">Supprimer</a>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="delete-{{ rep.getId() }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Confirmation de suppression</h5>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Êtes-vous sûr de vouloir supprimer ce repas.</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Fermer</button>
+                                                <a href="{{ path('supprimer-repas', {'id': rep.getId()}) }}" class="btn btn-danger btn-sm">Supprimer</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+
+                    <h1>Ajouter repas</h1>
+
+                    <form method='POST' action="{{ path('ajouter-repas') }}">
+                        <div class='form-div'>
+                            <label>Nom de repas</label>
+                            <input name='nom' required />
+                        </div>
+
+                        <div class='form-div'>
+                            <label>Prix</label>
+                            <input type='number' name='prix' required />
+                        </div>
+
+                        <div class='form-div'>
+                            <button type='submit' class='btn btn-primary btn-sm'>Enregistrer</button>
+                        </div>
+                    </form>
                     {% endif %}
                 </div>
             </div>
