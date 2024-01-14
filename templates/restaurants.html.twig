@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}{% endblock%}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock%}
+
+{% block body %}
+    <style>
+    #restaurants
+    {
+        margin-top: 100px;
+        margin-bottom: 300px;
+    }
+
+    .restaurant
+    {
+        border-bottom: 2px solid #ccc;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+    }
+
+    .restaurant .image
+    {
+        display: inline-block;
+    }
+
+    .restaurant .image img
+    {
+        height: 200px;
+        width: 300px;
+    }
+
+    .restaurant .content
+    {
+        display: inline-block;
+        padding-left: 50px;
+    }
+
+    .restaurant h1
+    {
+        font-size: 20px;
+        color: #999;
+    }
+
+    .restaurant a
+    {
+        text-decoration: none;
+    }
+    </style>
+
+    <section id="restaurants">
+        <div class='container'>
+            <div class='row'>
+                <div class='col-md-2'></div>
+                <div class='col-md-6'>
+                {% for restaurant in restaurants %}
+                    <div class='restaurant'>
+                        <div class='image'>
+                            <a href="#"><img src="img/restaurant.png" alt="..."></a>
+                        </div>
+
+                        <div class='content'>
+                            <a href="#"><h1>{{ restaurant.getNom() }}</h1></a>
+                            <p style='margin-top: 20px; margin-bottom: 5px;'>Téléphone: {{ restaurant.getTelephone() }}</p>
+                            <p>Addresse: {{ restaurant.getAddresse() }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}
