@@ -39,6 +39,18 @@ class RestaurantRepository extends ServiceEntityRepository
         }
     }
 
+    public function search($offset = 0, $limit = 4, $q = '')
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('u')
+            ->from($this->_entityName, 'u')
+            ->where('u.nom LIKE :q')
+            ->setParameter('q', '%'.$q.'%') ;
+        $qb->setMaxResults($limit);
+        $qb->setFirstResult($offset);
+        return $qb->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Restaurant[] Returns an array of Restaurant objects
 //     */

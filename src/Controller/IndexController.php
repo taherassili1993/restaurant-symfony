@@ -7,6 +7,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 
+use App\Entity\Restaurant;
+
 class IndexController extends AbstractController
 {
     /**
@@ -19,16 +21,19 @@ class IndexController extends AbstractController
     }
 
     /**
-     * @Route("/api/change-language", name="app_language_api", methods={"POST"})
+     *
+     * @Route("/recherche", name="recherche")
      */
-    public function register_api(Request $request): Response
+    public function restaurants(Request $request)
     {
-        $language = $request->get('language', 'fr');
-        $this->get('session')->set('language', $language);
-        $response = new Response( json_encode( ['success' => true] ) );
-        $response->headers->set( 'Content-Type', 'application/json' );
+        $em = $this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()->getRepository(Restaurant::class);
 
-        return $response;
+        $q = $request->query->get('q', '');
+
+        $restaurants = $repository->search(0, 12, $q);
+
+        return $this->render('restaurants.html.twig', ['restaurants' => $restaurants]);
     }
 
 }
