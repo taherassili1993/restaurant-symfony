@@ -43,11 +43,6 @@
         font-size: 20px;
         color: #999;
     }
-
-    .restaurant a
-    {
-        text-decoration: none;
-    }
     </style>
 
     <section id="restaurants">
@@ -55,20 +50,46 @@
             <div class='row'>
                 <div class='col-md-2'></div>
                 <div class='col-md-6'>
-                {% for restaurant in restaurants %}
                     <div class='restaurant'>
                         <div class='image'>
-                            <a href="{{ path('restaurant', {'id': restaurant.getId()}) }}"><img src="img/restaurant.png" alt="..."></a>
+                            <img src="{{ asset('img/restaurant.png') }}" alt="...">
                         </div>
 
                         <div class='content'>
-                            <a href="{{ path('restaurant', {'id': restaurant.getId()}) }}"><h1>{{ restaurant.getNom() }}</h1></a>
+                            <h1>{{ restaurant.getNom() }}</h1>
                             <p style='margin-top: 20px; margin-bottom: 5px;'>Téléphone: {{ restaurant.getTelephone() }}</p>
                             <p>Addresse: {{ restaurant.getAddresse() }}</p>
                         </div>
                     </div>
-                {% endfor %}
                 </div>
+                <div class='col-md-4'></div>
+
+            </div>
+
+            <div class='row'>
+                <div class='col-md-2'></div>
+                <div class='col-md-6'>
+                    <div class='restaurant'>
+
+                        <div class=''>
+                            <h1>Les repas</h1>
+                            <table class='table'>
+                                <tr>
+                                    <th>Nom de plat</th>
+                                    <th>Prix</th>
+                                </tr>
+                                {% for rep in repas %}
+                                <tr>
+                                    <td>{{ rep.getNom() }}</td>
+                                    <td>{{ rep.getPrix() }}<td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class='col-md-4'></div>
+                
             </div>
         </div>
     </section>
